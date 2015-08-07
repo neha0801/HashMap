@@ -3,6 +3,13 @@
  * @author Neha
  *
  */
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -18,17 +25,29 @@ public class IntegerValues {
 	 */
 	public static void main(String[] args) {
 		
-		int num =0;
-		
-		integerValues.put(1, "one");
-		integerValues.put(2, "two");
-		integerValues.put(3, "three");
-		integerValues.put(4, "four");
-		integerValues.put(5, "five");
-		integerValues.put(6, "six");
-		integerValues.put(7, "seven");
-		integerValues.put(8, "eight");
+		int num;
 
+		String filePath = "C:/Users/rvhu321018ur/Desktop/GIT Files/Hashmap Application/Hashmap/myIntegers.txt";
+		int key;
+		String value="";
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(filePath));
+
+			String line;
+			while((line=reader.readLine())!=null){
+				key = Integer.parseInt(line.split("\\s")[1]);
+				line = reader.readLine();
+				value = line.split("\\s")[1];
+				integerValues.put(key, value);
+			}
+			reader.close();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} 
+		
+		String fileName = (System.getProperty("user.dir") + File.separatorChar +"myIntegers.txt");
+		PrintWriter writer;
 		
 		while (choice.equalsIgnoreCase("y")){
 			
@@ -55,9 +74,20 @@ public class IntegerValues {
 				System.out.println("Incorrect input. Ending the Program");
 			}
 		}
+		try{
+			writer = new PrintWriter(fileName);
+			for(Integer k : integerValues.keySet()){
+			 //for(HashMap.Entry<Integer,String> m  :integerValues.entrySet()){
+				 System.out.println(k);
+				 writer.println("Key " + k +"\nValue " + integerValues.get(k));
+		      }
+			 writer.close();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		System.out.println("Good Bye!!");
 	}
-	
+	 
 	
 	/**
 	 * Method to enter the new key in the HashMap
@@ -75,6 +105,7 @@ public class IntegerValues {
 		} else if (userChoice.equalsIgnoreCase("y")){
 			System.out.println("Enter the value for the key: ");
 			integerValues.put(num, sc.next());
+			sc.nextLine();
 		}
 	}
 
