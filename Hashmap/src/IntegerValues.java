@@ -11,7 +11,7 @@ public class IntegerValues {
 
 	private static Scanner sc = new Scanner(System.in);
 	private static String choice="y";
-	static HashMap<Integer,String> integerValues = new HashMap<Integer,String>();
+	private static HashMap<Integer,String> integerValues = new HashMap<Integer,String>();
 
 	/**
 	 * @param args
