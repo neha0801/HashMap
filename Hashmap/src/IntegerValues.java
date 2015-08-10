@@ -1,4 +1,3 @@
-
 /**
  * @author Neha
  *
@@ -77,9 +76,7 @@ public class IntegerValues {
 		try{
 			writer = new PrintWriter(fileName);
 			for(Integer k : integerValues.keySet()){
-			 //for(HashMap.Entry<Integer,String> m  :integerValues.entrySet()){
-				 System.out.println(k);
-				 writer.println("Key " + k +"\nValue " + integerValues.get(k));
+				writer.println("Key " + k +"\nValue " + integerValues.get(k));
 		      }
 			 writer.close();
 		} catch (FileNotFoundException e1) {
